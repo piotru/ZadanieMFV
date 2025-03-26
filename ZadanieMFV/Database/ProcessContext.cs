@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ZadanieMFV.Models;
 
 namespace ZadanieMFV.Database
 {
@@ -10,6 +11,7 @@ namespace ZadanieMFV.Database
         {
             optionsBuilder.UseInMemoryDatabase(databaseName: "ProcessDb");
         }
-      // public DbSet<> ProductModels { get; set; }
+       public DbSet<ProcessStatusData> ProcessStatus { get; set; }
+        public DbSet<UserModel> Users { get; set; }
     }
 }
