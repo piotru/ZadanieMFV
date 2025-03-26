@@ -17,6 +17,8 @@ namespace ZadanieMFV.Logic
        public async Task<MailStatusModel> SendMailToUser(MailToUserModel message)
        {
           MailStatusModel status = new MailStatusModel();
+            //ustawiamy na error bo dopiero wyslanie  ustawia na sukces 
+          status.Status= Enums.MailStatusEnum.Error;
             //Sprawdzamy czy jest user 
             using var context = new ProcessContext();
             //Tu zastosowalem inna konstrukcje klauzuli where  , odpytujemy po email ale mozna rownie dobrze po id  wszystko zalezy jak wyglada logika biznesowa apki
