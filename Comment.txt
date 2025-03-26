@@ -1,0 +1,41 @@
+Nie wiem czy dobrze zrozumialem zadanie 
+Sa dwie clasy 
+1. Dotyczy obslugi procesow czyli wysylanie do bazy danych statusow procesow 
+2. Dotyczy samego wyslania maila 
+
+uzylem najprostszych  rozwiazan , w praktyce do wysylania maili uzywa sie innych  niz systemowe klientow poczty 
+Tam gdzie sie dalo opatrzylem komentarzem  gdzie w miare  wyjasniam o co mi chodzi 
+
+Baza jest in memory , wiec wiele nie ma  do  dzialania . Nie mniej jednak dodalem  funkcje  ktore tworza baze  oczywiscie nie pelnie i nie testowane 
+Migracje stosuje sie z lini polecen Dotnet lub consoli Nutget  wiec tu nie ma wiele do dodania w  kodzie 
+
+Dodalem kawalek kodu tworzacego index 
+
+Z koniecznosci jest to projekt bardzo uproszczony . 
+
+Bazowalem na  juz istniejacym rozwiazaniu ktore sam napisalem  ktore obslugiwalo watki   w Net 6. W net 6 nie ma obslugi  watkow , a dla poprawienia wydajnosci 
+nalezy zeby skomplikowane procesy wykonywac rownolegle to stworzylem takie rozwiazanie , oczywiscie obsluga jest duzo  bardziej skomplikowana .
+Nalezy na przyklad uwzglednic sytuacje kiedy aplikacja zatrzymuje sie . W kazdym razie  napisane rozwiazanie dzialalo i chyba dziala nadal . 
+Co prawda w net 9 jest mozliwosc watkowania  ale to jeszcze nie jest to co na przyklad  w aplikacjach na urzadzenia mobilne 
+
+Podejscie pozwala dowolne  wlasciwie konfigurowanie  dzialania procesow . Dla spojnosci logiki pewnie by bylo dodac proces f ktory jest 
+wyzwalany zakonczeniem wszystkich procesow albo tez  jakies cykliczne zadanie sprawdzajace stany wykonania 
+
+Wszystkie funkcje sa asynchroniczne tam gdzie sie da. 
+
+Transakcyjnosc  jest zaimplementowana tylko w funkcjach  zapisujacych lub zmieniajacych . 
+Oczywiscie w praktyce jest to duzo bardziej zlozone i zapytania sa  do wielu  tabel polaczonych  co czyni potrzebe optymalizacji . 
+
+W projekcie testowym powiem szczerze  zaszalalem ale korcilo mnie wykorzystac mozliwosci ladowania  zaleznosci dynamicznie i testowania ich 
+a nie statycznie odwolywac sie do uruchomionej aplikacji tak jak zazwyczaj sie robi.
+
+To tez sprawdzilem w boju testujac na srodowisku testowym  rozbudowe  relacji z 1: 1  do 1 do wielu   na kopii bazy produkcyjnej ( 60 GB )  . 
+Tak skonstruowane srodowisko pozwolilo nam dynamicznie przetestowac  dzialanie  rozbudowy tabel. 
+
+Dodalem Serilog  i obsluge w neiktorych miejscach . Oczywiscie mozna dodac wszedzie . 
+
+Paginacje sobie darowalem bo nie bardzo widze gdzie to tu zastosowac no chyba ze wysylamy  masowo ale to nalezy inaczej skostruowac .
+Konstrukcja Take nie jest najlepszym pomyslem , raczej nalezy  wysylac maile przy uzyciu UDW  bo wysylanie 1 po 1 mija sie z celem 
+
+Prosze pamietac ze mam inne zajecia i  ograniczony czas na przygotowanie przykladu . Co prawda sa to standardowe operacje ale obsluga logiki wymagala by poswiecenia troche czasu
+ktorego jest malo . 
