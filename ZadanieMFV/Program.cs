@@ -34,7 +34,12 @@ try
 
     Log.Information("Starting web application");
 
-  
+    /*Dodanie contextu do bazy ale ze jako inmemory 
+     * services.AddDbContext<ProcessContext>(o =>
+              {
+                  o.UseSqlServer(Configuration.GetConnectionString("ConnectionString"), sqlServerOptions => sqlServerOptions.CommandTimeout(120));
+              }, contextLifetime: ServiceLifetime.Transient, optionsLifetime: ServiceLifetime.Singleton);
+     */
 
     var app = builder.Build();
 

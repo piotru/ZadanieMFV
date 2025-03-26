@@ -5,6 +5,20 @@ namespace ZadanieMFV.Database
 {
     public class ProcessContext : DbContext
     {
+        //przykladowo 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ProcessStatusData>()
+            .HasIndex(x => new { x.id }, "Process_Index");
+
+            OnModelConfigurationEvents(modelBuilder);
+        }
+        static void OnModelConfigurationEvents(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProcessStatusData>();
+        }
 
         protected override void OnConfiguring
                    (DbContextOptionsBuilder optionsBuilder)
